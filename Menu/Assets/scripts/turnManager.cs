@@ -18,10 +18,8 @@ public class turnManager : MonoBehaviour
     {
         if (playerTurn == true)
         {
-            print("player turn");
             if (Input.GetKey("a"))
             {
-                print("a pressed");
                 playerTurn = false;
                 enemyTurn = true;
             }
@@ -33,10 +31,8 @@ public class turnManager : MonoBehaviour
         }
         if (enemyTurn == true)
         {
-            print("enemy turn");
             if (Input.GetKey("b"))
             {
-                print("a pressed");
                 playerTurn = true;
                 enemyTurn = false;
             }
