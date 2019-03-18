@@ -38,7 +38,7 @@ public class MenuScript : MonoBehaviour
             }
             if (Input.GetKeyDown("space") && currVar == 1)
             {
-                SceneManager.LoadScene("battleScene");
+                SceneManager.LoadScene("overWorld_01");
             }
             if (Input.GetKeyDown("space") && currVar == 2)
             {

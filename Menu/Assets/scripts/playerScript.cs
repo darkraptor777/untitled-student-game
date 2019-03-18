@@ -11,13 +11,11 @@ public class playerScript : MonoBehaviour
     public int playerHealth = 100;
     public const int maxplayerhealth = 100;
     public int playerDamage = 10;
-    public int enemyHealth = 100;
     int weaponDamage;
-    int totalDamage;
+    public int totalDamage;
 
     public Text playerDamageText;
     public Slider playerHealthSlider;
-    public Slider enemyHealthSlider;
 
     weapon[] weapons = { new weapon("none",0), new weapon("bronze",10), new weapon("iron",15), new weapon("steel",25), new weapon("reinforced steel",40)};
     int equippedweapon = 0;
@@ -40,18 +38,12 @@ public class playerScript : MonoBehaviour
             print("Switch Weapons to "+ weapons[equippedweapon].getname());
         }
         playerDamageText.text = "" + totalDamage;
-
-
         playerHealthSlider.value = (playerHealth);
-        enemyHealthSlider.value = (enemyHealth);
         
     }
 
-    public void DamageCalc()
+    public void PlayerDamageCalc()
     {
-        print("enemy health before " + enemyHealth);
-        print("incoming damage " + totalDamage);
-        enemyHealth = enemyHealth - totalDamage;
-        print("enemy health after " + enemyHealth);
+        playerHealth = playerHealth - GameObject.FindWithTag("Enemy").GetComponent<enemyScript>().enemy1Damage;
     }
 }

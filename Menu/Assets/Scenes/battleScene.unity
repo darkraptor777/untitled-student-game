@@ -424,6 +424,27 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &290795205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3071862012579269548, guid: f5b2596476f32d145bab8dada6530c63,
+    type: 3}
+  m_PrefabInstance: {fileID: 3071862012212472918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &290795208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290795205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba239489d0ea26f41a01dc080043df0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy1Health: 30
+  enemy1Damage: 10
+  enemyHealthSlider: {fileID: 2005653511}
 --- !u!1 &457712660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,10 +1416,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 100
   playerDamage: 10
-  enemyHealth: 100
+  totalDamage: 0
   playerDamageText: {fileID: 881858954}
   playerHealthSlider: {fileID: 276199203}
-  enemyHealthSlider: {fileID: 2005653511}
 --- !u!4 &1485713788
 Transform:
   m_ObjectHideFlags: 0
@@ -1772,7 +1792,7 @@ GameObject:
   - component: {fileID: 1951294555}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1897,8 +1917,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 0
+  m_MaxValue: 30
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1937,6 +1957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071862012579269548, guid: f5b2596476f32d145bab8dada6530c63,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3071862012579269546, guid: f5b2596476f32d145bab8dada6530c63,
         type: 3}
