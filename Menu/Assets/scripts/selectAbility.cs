@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.scripts;
+using UnityEngine.SceneManagement;
+
+//text not updated when already present
 
 public class selectAbility : MonoBehaviour
 {
@@ -11,20 +14,32 @@ public class selectAbility : MonoBehaviour
     bool playerTurn = true;
     bool enemyTurn = false;
 
+    bool defending = false;
+
     public GameObject attack;
     public GameObject defend;
     public GameObject items;
     public GameObject flee;
+    public GameObject etext;
+    public GameObject ptext;
+
+    private enemyScript eScript;
+    private playerScript pScript;
+
+    private void Start()
+    {
+        eScript = GameObject.FindWithTag("Enemy").GetComponent<enemyScript>();
+        pScript = GameObject.FindWithTag("Player").GetComponent<playerScript>();
+    }
 
     public void Update()
     {
-        //player turn
-        print("player turn");
         if (playerTurn == true)
         {
+            defending = false;
             if (toggle == true)
             {
-                StartCoroutine(toggling());
+                StartCoroutine(Toggling());
                 if (selectedVar == 1)
                 {
                     attack.SetActive(true);
@@ -56,15 +71,21 @@ public class selectAbility : MonoBehaviour
             }
             if (Input.GetKeyDown("space") && selectedVar == 1)
             {
-                print("Player Attacks");
-                GameObject.FindWithTag("Enemy").GetComponent<enemyScript>().EnemyDamageCalc();
+                //ptext.SetActive(true);
+                eScript.takedamage(pScript.totalDamage);
+                pScript.updateDMGText(pScript.totalDamage);
+                StartCoroutine(WaitForPText());
+                //ptext.SetActive(false);
                 playerTurn = false;
                 enemyTurn = true;
             }
             if (Input.GetKeyDown("space") && selectedVar == 2)
             {
-                print("Player Defends");
-                //defend bonus true, damage calc redone
+                //etext.SetActive(true);
+                //GameObject.FindWithTag("Player").GetComponent<playerScript>().PlayerDamageCalcDef();
+                defending = true;
+                StartCoroutine(WaitForEText());
+                //etext.SetActive(false);
                 playerTurn = false;
                 enemyTurn = true;
             }
@@ -78,28 +99,42 @@ public class selectAbility : MonoBehaviour
             if (Input.GetKeyDown("space") && selectedVar == 4)
             {
                 print("Player Flees");
-                //quit battle
+                SceneManager.LoadScene("overWorld_01");
             }
         }
 
-
+        //enemy turn/ai script
         if(enemyTurn==true && playerTurn == false)
         {
-            print("enemy turn");
             attack.SetActive(false);
             defend.SetActive(false);
             items.SetActive(false);
             flee.SetActive(false);
             //play animation
-            GameObject.FindWithTag("Player").GetComponent<playerScript>().PlayerDamageCalc();
-            //wait
+
+
+
+            if (!defending)
+            {
+                print("NO");
+                eScript.updateDMGText(eScript.enemyDamage);
+                pScript.takedamage(eScript.enemyDamage);
+            }
+            if (defending)
+            {
+                print("YES");
+                eScript.updateDMGText(eScript.enemyDamage / 2);
+                pScript.takedamage(eScript.enemyDamage / 2);
+            }
+            StartCoroutine(WaitForEText());
+            
             playerTurn = true;
             enemyTurn = false;
         }
     }
 
 
-    IEnumerator toggling()
+    IEnumerator Toggling()
     {
         toggle = false;
         if (Input.GetAxis("Horizontal") < 0)
@@ -117,5 +152,17 @@ public class selectAbility : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
             toggle = true;
-        }
+    }
+    IEnumerator WaitForEText()
+    {
+        etext.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        etext.SetActive(false);
+    }
+    IEnumerator WaitForPText()
+    {
+        ptext.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        ptext.SetActive(false);
+    }
 }

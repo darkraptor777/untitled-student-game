@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using Assets.scripts;
 
@@ -13,7 +14,7 @@ public class playerScript : MonoBehaviour
     public int playerDamage = 10;
     int weaponDamage;
     public int totalDamage;
-
+    bool died = false;
     public Text playerDamageText;
     public Slider playerHealthSlider;
 
@@ -37,13 +38,44 @@ public class playerScript : MonoBehaviour
                 equippedweapon = 0;
             print("Switch Weapons to "+ weapons[equippedweapon].getname());
         }
-        playerDamageText.text = "" + totalDamage;
+        //playerDamageText.text = "" + totalDamage;
         playerHealthSlider.value = (playerHealth);
-        
+
+        if (died == true)
+        {
+            SceneManager.LoadScene("gameOver");
+        }
     }
 
+    public void updateDMGText(int dmg)
+    {
+        playerDamageText.text = "" + dmg;
+    }
+
+    public void takedamage(int dmg)
+    {
+        playerHealth = playerHealth - dmg;
+        CheckPlayerDead();
+    }
+/*
     public void PlayerDamageCalc()
     {
         playerHealth = playerHealth - GameObject.FindWithTag("Enemy").GetComponent<enemyScript>().enemy1Damage;
+
+        PlayerDead();
+    }
+
+    public void PlayerDamageCalcDef()
+    {
+        playerHealth = playerHealth - (GameObject.FindWithTag("Enemy").GetComponent<enemyScript>().enemy1Damage / 2);
+        PlayerDead();
+    }
+    */
+    public void CheckPlayerDead()
+    {
+        if (playerHealth <= 0)
+        {
+            died = true;
+        }    
     }
 }

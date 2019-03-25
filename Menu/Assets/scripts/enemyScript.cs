@@ -7,21 +7,24 @@ using UnityEngine.SceneManagement;
 public class enemyScript : MonoBehaviour
 {
     public static enemyScript instance = null;
-    public int enemy1Health = 30;
-    public const int maxenemy1Health = 30;
-    public int enemy1Damage = 10;
+    public int enemyHealth = 30;
+    public const int maxenemyHealth = 30;
+    public int enemyDamage = 10;
     bool wonEncounter = false;
-
+    public Text enemyDamageText;
     public Slider enemyHealthSlider;
+    bool why = false;
+    public GameObject ptext;
 
     void Start()
     {
-        enemyHealthSlider.maxValue = maxenemy1Health;
+        enemyHealthSlider.maxValue = maxenemyHealth;
     }
 
     void Update()
     {
-        enemyHealthSlider.value = (enemy1Health);
+        enemyHealthSlider.value = (enemyHealth);
+        //enemyDamageText.text = "" + enemyDamage;
 
         if (wonEncounter)
         {
@@ -29,15 +32,25 @@ public class enemyScript : MonoBehaviour
         }
     }
 
+    public void takedamage(int dmg)
+    {
+        enemyHealth = enemyHealth - dmg;
+        CheckEnemyDead();
+    }
+    public void updateDMGText(int dmg)
+    {
+        enemyDamageText.text = "" + dmg;
+    }
+    /*
     public void EnemyDamageCalc()
     {
-        enemy1Health = enemy1Health - GameObject.FindWithTag("Player").GetComponent<playerScript>().totalDamage;
-        enemyDead();
+        enemyHealth = enemyHealth - GameObject.FindWithTag("Player").GetComponent<playerScript>().totalDamage;
+        CheckEnemyDead();
     }
-
-    public void enemyDead()
+    */
+    public void CheckEnemyDead()
     {
-        if(enemy1Health<=0)
+        if(enemyHealth<=0)
         {
             wonEncounter = true;
         }

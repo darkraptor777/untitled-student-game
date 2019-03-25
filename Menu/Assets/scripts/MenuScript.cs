@@ -16,7 +16,7 @@ public class MenuScript : MonoBehaviour
     {
         if (toggle == true)
             {
-                StartCoroutine(toggling());
+                StartCoroutine(Toggling());
                 if (currVar == 1)
                 {
                     start.SetActive(true);
@@ -50,7 +50,7 @@ public class MenuScript : MonoBehaviour
             }
     }
 
-IEnumerator toggling()
+IEnumerator Toggling()
     {
         toggle = false;
         if (Input.GetAxis("Vertical") > 0)
