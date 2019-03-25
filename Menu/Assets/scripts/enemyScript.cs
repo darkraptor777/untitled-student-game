@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class enemyScript : MonoBehaviour
 {
     public static enemyScript instance = null;
+    public string enemyName;
     public int enemyHealth = 30;
     public const int maxenemyHealth = 30;
     public int enemyDamage = 10;
@@ -19,6 +20,7 @@ public class enemyScript : MonoBehaviour
     void Start()
     {
         enemyHealthSlider.maxValue = maxenemyHealth;
+        enemyHealthSlider.GetComponentInChildren<Text>().text = enemyName;
     }
 
     void Update()

@@ -30,9 +30,9 @@ public class playerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.name == "World_Frank")
         {
-            SceneManager.LoadScene("battleScene");
+            SceneManager.LoadScene("battleScene_Frank");
         }
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7558468901463062756}
   - component: {fileID: 7558468901463062757}
   m_Layer: 0
-  m_Name: Frank
+  m_Name: Battle_Frank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba239489d0ea26f41a01dc080043df0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Stressling
   enemyHealth: 30
   enemyDamage: 10
   enemyDamageText: {fileID: 0}
