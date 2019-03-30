@@ -112,9 +112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba239489d0ea26f41a01dc080043df0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveObject: {fileID: 0}
   enemyName: Stressling
   enemyHealth: 30
   enemyDamage: 10
   enemyDamageText: {fileID: 0}
   enemyHealthSlider: {fileID: 0}
   ptext: {fileID: 0}
+  bounty: 20

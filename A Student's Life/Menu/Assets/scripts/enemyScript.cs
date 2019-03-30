@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class enemyScript : MonoBehaviour
 {
+    public GameObject saveObject;
+    private SaveInfoScript saveInfo;
     public static enemyScript instance = null;
     public string enemyName;
     public int enemyHealth = 30;
@@ -17,8 +19,11 @@ public class enemyScript : MonoBehaviour
     bool why = false;
     public GameObject ptext;
 
+    public int bounty;
+
     void Start()
     {
+        saveInfo = saveObject.GetComponent<SaveInfoScript>();
         enemyHealthSlider.maxValue = maxenemyHealth;
         enemyHealthSlider.GetComponentInChildren<Text>().text = enemyName;
     }
@@ -30,6 +35,7 @@ public class enemyScript : MonoBehaviour
 
         if (wonEncounter)
         {
+            saveInfo.Save();
             SceneManager.LoadScene("overWorld_01");
         }
     }
@@ -55,6 +61,7 @@ public class enemyScript : MonoBehaviour
         if(enemyHealth<=0)
         {
             wonEncounter = true;
+            saveInfo.Money += bounty;
         }
     }
 }
