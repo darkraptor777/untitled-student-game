@@ -11,7 +11,6 @@ public class playerScript : MonoBehaviour
 	
     public GameObject saveObject;
     private SaveInfoScript saveInfo;
-	public WorldSaveScript worldInfo;
     public static playerScript instance = null;
     public int playerHealth = 100;
     public int maxplayerhealth = 100;
@@ -30,9 +29,6 @@ public class playerScript : MonoBehaviour
     void Start()
     {
         saveInfo=saveObject.GetComponent<SaveInfoScript>();
-		worldInfo=saveObject.GetComponent<WorldSaveScript>();
-		transform.position.x=worldInfo.playerX;
-		transform.position.y=worldInfo.playerY;
         playerHealth = saveInfo.Health;
         maxplayerhealth = armour[saveInfo.ArmourTier];
         playerHealthSlider.maxValue = maxplayerhealth;

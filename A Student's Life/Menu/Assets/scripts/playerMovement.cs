@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
 {
+	
+	public GameObject saveObject;
+    private SaveInfoScript saveInfo;
+	private WorldSaveScript worldInfo;
+	
     public float speed;
     private Rigidbody2D rb2d;
     public string nextLVL;
@@ -13,8 +18,13 @@ public class playerMovement : MonoBehaviour
 
     void Start()
     {
+		print("Loaded Player");
+		saveInfo=saveObject.GetComponent<SaveInfoScript>();
+		worldInfo=saveObject.GetComponent<WorldSaveScript>();
+		transform.position= new Vector3(worldInfo.playerX,worldInfo.playerY, 0.0f);
         rb2d = GetComponent<Rigidbody2D>();
     }
+	
 
     void FixedUpdate()
     {
@@ -34,8 +44,24 @@ public class playerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+		worldInfo.playerX=transform.position.x;
+		worldInfo.playerY=transform.position.y;
+		worldInfo.Save();
         if (col.gameObject.name == "World_Frank")
         {
+			switch(col.gameObject.GetComponent<enemyWorldBehaviour>().ID)
+			{
+				case 1:
+					worldInfo.enemyOne=false;
+					break;
+				case 2:
+					worldInfo.enemyTwo=false;
+					break;
+				case 3:
+					worldInfo.enemyThree=false;
+					break;
+			}
+			worldInfo.Save();
             SceneManager.LoadScene("battleScene_Frank");
         }
         if (col.gameObject.tag == "RBumper")

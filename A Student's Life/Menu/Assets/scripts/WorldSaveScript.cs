@@ -19,6 +19,7 @@ public class WorldSaveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		print("Loaded World Save");
         Load();
     }
 
