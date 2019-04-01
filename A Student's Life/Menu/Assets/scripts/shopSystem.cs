@@ -8,35 +8,40 @@ public class shopSystem : MonoBehaviour
     //player gold amount
     int playerGold = 20000;
 
-    //weapon prices
-    int bronzeSwordCost = 100;
-    bool bronzeSwordUp = false;
-    int ironSwordCost = 200;
-    bool ironSwordUp = false;
-    int steelSwordCost = 500;
-    bool steelSwordUp = false;
-    int rsteelSwordCost = 1000;
-    bool rsteelSwordUp = false;
+    //selection variables
+    public GameObject wep;
+    public GameObject arm;
+    public GameObject boo;
+    public GameObject sp;
+    public GameObject mp;
+    public GameObject lp;
+    int currVar = 1;
+    bool toggle = true;
 
-    //armour prices
-    int bronzeArmourCost = 100;
+    //weapon bools
+    bool noWeapon = true;
+    bool bronzeSwordUp = false;
+    bool ironSwordUp = false;
+    bool steelSwordUp = false;
+    bool rsteelSwordUp = false;
+    int swordCost = 100;
+
+    //armour bools
+    bool noArmour = true;
     bool bronzeArmourUp = false;
-    int ironArmourCost = 200;
     bool ironArmourUp = false;
-    int steelArmourCost = 500;
     bool steelArmourUp = false;
-    int rsteelArmourCost = 1000;
     bool rsteelArmourUp = false;
+    int armourCost = 100;
 
     //boots prices
-    int boots1Cost = 50;
+    bool noBoots = true;
     bool boots1Up = false;
-    int boots2Cost = 100;
     bool boots2Up = false;
-    int boots3Cost = 150;
     bool boots3Up = false;
-    int boots4Cost = 250;
     bool boots4Up = false;
+    int bootsCost = 50;
+
 
     //potions prices
     int potSCost = 50;
@@ -50,21 +55,227 @@ public class shopSystem : MonoBehaviour
     public Text smallpotionAmount;
     public Text mediumpotionAmount;
     public Text largepotionAmount;
+	public Text weaponCostText;
+	public Text armourCostText;
+	public Text bootsCostText;
     public Text playerMoney;
 
     void Start()
     {
-
+		
     }
 
     void Update()
     {
+        weaponCostText.text = "" + swordCost;
+        armourCostText.text = "" + armourCost;
+        bootsCostText.text = "" + bootsCost;
+
         smallpotionAmount.text = "" + potSAmount;
         mediumpotionAmount.text = "" + potMAmount;
         largepotionAmount.text = "" + potLAmount;
-        playerMoney.text = "" + playerGold;
+        playerMoney.text = playerGold + " Gold";
 
-        if (Input.GetKeyUp(KeyCode.E))
+        if (toggle == true)
+        {
+            StartCoroutine(Toggling());
+            if (currVar == 1)
+            {
+                wep.SetActive(true);
+                arm.SetActive(false);
+                boo.SetActive(false);
+                sp.SetActive(false);
+                mp.SetActive(false);
+                lp.SetActive(false);
+            }
+            if (currVar == 2)
+            {
+                wep.SetActive(false);
+                arm.SetActive(true);
+                boo.SetActive(false);
+                sp.SetActive(false);
+                mp.SetActive(false);
+                lp.SetActive(false);
+            }
+            if (currVar == 3)
+            {
+                wep.SetActive(false);
+                arm.SetActive(false);
+                boo.SetActive(true);
+                sp.SetActive(false);
+                mp.SetActive(false);
+                lp.SetActive(false);
+            }
+            if (currVar == 4)
+            {
+                wep.SetActive(false);
+                arm.SetActive(false);
+                boo.SetActive(false);
+                sp.SetActive(true);
+                mp.SetActive(false);
+                lp.SetActive(false);
+            }
+            if (currVar == 5)
+            {
+                wep.SetActive(false);
+                arm.SetActive(false);
+                boo.SetActive(false);
+                sp.SetActive(false);
+                mp.SetActive(true);
+                lp.SetActive(false);
+            }
+            if (currVar == 6)
+            {
+                wep.SetActive(false);
+                arm.SetActive(false);
+                boo.SetActive(false);
+                sp.SetActive(false);
+                mp.SetActive(false);
+                lp.SetActive(true);
+            }
+        }
+
+
+        //weapon buying selection
+        if (Input.GetKeyDown("space") && currVar == 1 && noWeapon)
+        {
+            if (playerGold >= swordCost)
+            {
+                playerGold = playerGold - swordCost;
+                swordCost = swordCost + 100;
+                noWeapon = false;
+                bronzeSwordUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 1 && bronzeSwordUp)
+        {
+            if (playerGold >= swordCost)
+            {
+                playerGold = playerGold - swordCost;
+                swordCost = swordCost + 300;
+                bronzeSwordUp = false;
+                ironSwordUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 1 && ironSwordUp)
+        {
+            if (playerGold >= swordCost)
+            {
+                playerGold = playerGold - swordCost;
+                swordCost = swordCost + 500;
+                ironSwordUp = false;
+                steelSwordUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 1 && steelSwordUp)
+        {
+            if (playerGold >= swordCost)
+            {
+                playerGold = playerGold - swordCost;
+                steelSwordUp = false;
+                rsteelSwordUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 1 && rsteelSwordUp)
+        {
+
+        }
+
+
+        //armour buying selection
+        if (Input.GetKeyDown("space") && currVar == 2 && noArmour)
+        {
+            if (playerGold >= armourCost)
+            {
+                playerGold = playerGold - armourCost;
+                armourCost = armourCost + 100;
+                noArmour = false;
+                bronzeArmourUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 2 && bronzeArmourUp)
+        {
+            if (playerGold >= armourCost)
+            {
+                playerGold = playerGold - armourCost;
+                armourCost = armourCost + 300;
+                bronzeArmourUp = false;
+                ironArmourUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 2 && ironArmourUp)
+        {
+            if (playerGold >= armourCost)
+            {
+                playerGold = playerGold - armourCost;
+                armourCost = armourCost + 500;
+                ironArmourUp = false;
+                steelArmourUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 2 && steelArmourUp)
+        {
+            if (playerGold >= armourCost)
+            {
+                playerGold = playerGold - armourCost;
+                steelArmourUp = false;
+                rsteelArmourUp = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 2 && rsteelArmourUp)
+        {
+
+        }
+
+
+        //boots buying selection
+        if (Input.GetKeyDown("space") && currVar == 3 && noBoots)
+        {
+            if (playerGold >= bootsCost)
+            {
+                playerGold = playerGold - bootsCost;
+                bootsCost = bootsCost + 50;
+                noBoots = false;
+                boots1Up = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 3 && boots1Up)
+        {
+            if (playerGold >= bootsCost)
+            {
+                playerGold = playerGold - bootsCost;
+                bootsCost = bootsCost + 50;
+                boots1Up = false;
+                boots2Up = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 3 && boots2Up)
+        {
+            if (playerGold >= bootsCost)
+            {
+                playerGold = playerGold - bootsCost;
+                bootsCost = bootsCost + 100;
+                boots2Up = false;
+                boots3Up = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 3 && boots3Up)
+        {
+            if (playerGold >= bootsCost)
+            {
+                playerGold = playerGold - bootsCost;
+                boots3Up = false;
+                boots4Up = true;
+            }
+        }
+        else if (Input.GetKeyDown("space") && currVar == 3 && boots4Up)
+        {
+
+        }
+
+
+        //potion buying selection
+        if (Input.GetKeyDown("space") && currVar == 4)
         {
             if (playerGold >= potSCost)
             {
@@ -72,7 +283,7 @@ public class shopSystem : MonoBehaviour
                 potSAmount++;
             }
         }
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyDown("space") && currVar == 5)
         {
             if (playerGold >= potMCost)
             {
@@ -80,7 +291,7 @@ public class shopSystem : MonoBehaviour
                 potMAmount++;
             }
         }
-        if (Input.GetKeyUp(KeyCode.G))
+        if (Input.GetKeyDown("space") && currVar == 6)
         {
             if (playerGold >= potLCost)
             {
@@ -90,62 +301,23 @@ public class shopSystem : MonoBehaviour
         }
     }
 
-    void Buy()
+    IEnumerator Toggling()
     {
-        //weapon buying bools
-        if (playerGold >= bronzeSwordCost)
+        toggle = false;
+        if (Input.GetAxis("Horizontal") > 0)
         {
-            bronzeSwordUp = true;
+            currVar++;
         }
-        if (playerGold >= ironSwordCost)
+        if (Input.GetAxis("Horizontal") < 0)
         {
-            ironSwordUp = true;
+            currVar--;
         }
-        if (playerGold >= steelSwordCost)
-        {
-            steelSwordUp = true;
-        }
-        if (playerGold >= rsteelSwordCost)
-        {
-            rsteelSwordUp = true;
-        }
+        if (currVar > 6)
+            currVar = 1;
+        if (currVar < 1)
+            currVar = 6;
 
-        //armour buying bools
-        if (playerGold >= bronzeArmourCost)
-        {
-            bronzeArmourUp = true;
-        }
-        if (playerGold >= ironArmourCost)
-        {
-            ironArmourUp = true;
-        }
-        if (playerGold >= steelArmourCost)
-        {
-            steelArmourUp = true;
-        }
-        if (playerGold >= rsteelArmourCost)
-        {
-            rsteelArmourUp = true;
-        }
-
-        //boots buying bools
-        if (playerGold >= boots1Cost)
-        {
-            boots1Up = true;
-        }
-        if (playerGold >= boots2Cost)
-        {
-            boots2Up = true;
-        }
-        if (playerGold >= boots3Cost)
-        {
-            boots3Up = true;
-        }
-        if (playerGold >= boots4Cost)
-        {
-            boots4Up = true;
-        }
-
-        //potion buying stacks
+        yield return new WaitForSeconds(0.3f);
+        toggle = true;
     }
 }

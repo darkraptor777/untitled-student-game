@@ -57,3 +57,6 @@ TagManager:
   - name: ShopUI
     uniqueID: 1349092475
     locked: 0
+  - name: ShopArrow
+    uniqueID: 3128097781
+    locked: 0

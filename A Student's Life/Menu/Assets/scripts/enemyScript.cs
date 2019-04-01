@@ -16,7 +16,6 @@ public class enemyScript : MonoBehaviour
     bool wonEncounter = false;
     public Text enemyDamageText;
     public Slider enemyHealthSlider;
-    bool why = false;
     public GameObject ptext;
 
     public int bounty;

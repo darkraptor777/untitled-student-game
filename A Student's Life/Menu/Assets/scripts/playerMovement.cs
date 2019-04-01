@@ -26,20 +26,19 @@ public class playerMovement : MonoBehaviour
     }
 	
 
-    void FixedUpdate()
+    void Update()
     {
-
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+		//FlipImg(moveHorizontal);
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-
-        FlipImg(moveHorizontal);
 
         if (moveHorizontal == 0 && moveVertical == 0)
         {
             rb2d.velocity = new Vector2(0.0f, 0.0f);
         }
         rb2d.AddForce(movement * speed);
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -84,5 +83,4 @@ public class playerMovement : MonoBehaviour
             transform.localScale = scale;
         }
     }
-
 }
