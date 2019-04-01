@@ -1,1 +1,1 @@
-23.63514 -0.2367479 True False True 
+-22 0 True True True 
