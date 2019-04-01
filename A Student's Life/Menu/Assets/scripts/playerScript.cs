@@ -8,9 +8,10 @@ using Assets.scripts;
 
 public class playerScript : MonoBehaviour
 {
-
+	
     public GameObject saveObject;
     private SaveInfoScript saveInfo;
+	public WorldSaveScript worldInfo;
     public static playerScript instance = null;
     public int playerHealth = 100;
     public const int maxplayerhealth = 100;
@@ -27,6 +28,9 @@ public class playerScript : MonoBehaviour
     void Start()
     {
         saveInfo=saveObject.GetComponent<SaveInfoScript>();
+		worldInfo=saveObject.GetComponent<WorldSaveScript>();
+		transform.position.x=worldInfo.playerX;
+		transform.position.y=worldInfo.playerY;
         playerHealth = saveInfo.Health;
         equippedweapon = saveInfo.WeaponTier;
     }
