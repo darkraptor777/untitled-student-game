@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/overWorld_02.unity
     guid: 598ba69146dddb245a832aa2f90f70bd
   - enabled: 1
+    path: Assets/Scenes/overWorld_03.unity
+    guid: ff0be32210134b542bbef20eaa17a373
+  - enabled: 1
     path: Assets/Scenes/overWorldShop.unity
     guid: 2e8c1ad0e62c1ff4da5f44ea487402ee
   - enabled: 1
