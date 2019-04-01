@@ -7,6 +7,9 @@ public class playerMovement : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb2d;
+    public string nextLVL;
+    private bool facingRight;
+
 
     void Start()
     {
@@ -20,6 +23,7 @@ public class playerMovement : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
+        FlipImg(moveHorizontal);
 
         if (moveHorizontal == 0 && moveVertical == 0)
         {
@@ -36,11 +40,23 @@ public class playerMovement : MonoBehaviour
         }
         if (col.gameObject.tag == "RBumper")
         {
-            SceneManager.LoadScene("overWorld_02");
+            SceneManager.LoadScene(nextLVL);
         }
         if (col.gameObject.tag == "Shop")
         {
             SceneManager.LoadScene("shopScene");
         }
     }
+
+    private void FlipImg(float moveHorizontal)
+    {
+        if (moveHorizontal < 0 && !facingRight || moveHorizontal > 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+    }
+
 }

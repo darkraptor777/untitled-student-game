@@ -13,7 +13,7 @@ public class playerScript : MonoBehaviour
     private SaveInfoScript saveInfo;
     public static playerScript instance = null;
     public int playerHealth = 100;
-    public const int maxplayerhealth = 100;
+    public int maxplayerhealth = 100;
     public int playerDamage = 10;
     int weaponDamage;
     public int totalDamage;
@@ -22,12 +22,16 @@ public class playerScript : MonoBehaviour
     public Slider playerHealthSlider;
 
     weapon[] weapons = { new weapon("none",0), new weapon("bronze",10), new weapon("iron",15), new weapon("steel",25), new weapon("reinforced steel",40)};
+    int [] armour = { 100, 125, 150, 175, 200 };
+
     int equippedweapon = 0;
 
     void Start()
     {
         saveInfo=saveObject.GetComponent<SaveInfoScript>();
         playerHealth = saveInfo.Health;
+        maxplayerhealth = armour[saveInfo.ArmourTier];
+        playerHealthSlider.maxValue = maxplayerhealth;
         equippedweapon = saveInfo.WeaponTier;
     }
 
@@ -35,6 +39,7 @@ public class playerScript : MonoBehaviour
     {
         //weapon calculations
         totalDamage = playerDamage + weapons[equippedweapon].getdmg();
+
 
         //switch weapons
         if (Input.GetKeyDown("e")) {
