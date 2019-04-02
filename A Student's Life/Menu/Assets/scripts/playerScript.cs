@@ -67,6 +67,11 @@ public class playerScript : MonoBehaviour
         playerHealth = playerHealth - dmg;
         CheckPlayerDead();
     }
+
+    public void addhealth(int h)
+    {
+        playerHealth = playerHealth + h;
+    }
 /*
     public void PlayerDamageCalc()
     {

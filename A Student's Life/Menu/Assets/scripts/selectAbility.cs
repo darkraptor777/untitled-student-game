@@ -23,6 +23,8 @@ public class selectAbility : MonoBehaviour
     public GameObject etext;
     public GameObject ptext;
 
+    public GameObject itemMenu;
+
     private enemyScript eScript;
     private playerScript pScript;
 
@@ -30,6 +32,7 @@ public class selectAbility : MonoBehaviour
     {
         eScript = GameObject.FindWithTag("Enemy").GetComponent<enemyScript>();
         pScript = GameObject.FindWithTag("Player").GetComponent<playerScript>();
+      
     }
 
     public void Update()
@@ -46,6 +49,7 @@ public class selectAbility : MonoBehaviour
                     defend.SetActive(false);
                     items.SetActive(false);
                     flee.SetActive(false);
+                    itemMenu.SetActive(false);
                 }
                 if (selectedVar == 2)
                 {
@@ -53,6 +57,7 @@ public class selectAbility : MonoBehaviour
                     defend.SetActive(true);
                     items.SetActive(false);
                     flee.SetActive(false);
+                    itemMenu.SetActive(false);
                 }
                 if (selectedVar == 3)
                 {
@@ -60,6 +65,8 @@ public class selectAbility : MonoBehaviour
                     defend.SetActive(false);
                     items.SetActive(true);
                     flee.SetActive(false);
+                    itemMenu.SetActive(true);
+                    pScript.addhealth(1);
                 }
                 if (selectedVar == 4)
                 {
@@ -67,6 +74,7 @@ public class selectAbility : MonoBehaviour
                     defend.SetActive(false);
                     items.SetActive(false);
                     flee.SetActive(true);
+                    itemMenu.SetActive(false);
                 }
             }
             if (Input.GetKeyDown("space") && selectedVar == 1)
