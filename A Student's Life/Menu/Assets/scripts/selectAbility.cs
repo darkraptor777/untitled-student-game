@@ -126,7 +126,7 @@ public class selectAbility : MonoBehaviour
                 itemMenu.SetActive(true);
                 toggle = false;
                 canBrowse = true;
-
+                StartCoroutine(MenuSwitchDelay());
             }
             if (Input.GetKeyDown("space") && selectedVar == 4) //flee option
             {
@@ -262,8 +262,16 @@ public class selectAbility : MonoBehaviour
     IEnumerator ToggleTimer()
     {
         toggle = false;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         toggle = true;
+    }
+
+    IEnumerator MenuSwitchDelay()
+    {
+        toggle = false;
+        canBrowse = false;
+        yield return new WaitForSeconds(0.2f);
+        canBrowse = true;
     }
 
     void ItemBrowse()
@@ -271,10 +279,12 @@ public class selectAbility : MonoBehaviour
         if (Input.GetAxis("Horizontal") < 0)
         {
             selectedItem--;
+            StartCoroutine(BrowseTimer());
         }
         if (Input.GetAxis("Horizontal") > 0)
         {
             selectedItem++;
+            StartCoroutine(BrowseTimer());
         }
         if (selectedItem > 4)
             selectedItem = 1;
@@ -285,7 +295,7 @@ public class selectAbility : MonoBehaviour
     IEnumerator BrowseTimer()
     {
         canBrowse = false;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         canBrowse = true;
     }
 
