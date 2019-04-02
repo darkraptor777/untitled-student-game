@@ -22,7 +22,7 @@ public class playerMovement : MonoBehaviour
 		saveInfo=saveObject.GetComponent<SaveInfoScript>();
 		worldInfo=saveObject.GetComponent<WorldSaveScript>();
 		transform.position= new Vector3(worldInfo.playerX,worldInfo.playerY, 0.0f);
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2d = transform.gameObject.GetComponent<Rigidbody2D>();
     }
 	
 

@@ -8,13 +8,16 @@ using UnityEngine.SceneManagement;
 
 public class selectAbility : MonoBehaviour
 {
-    int selectedVar = 1;
-    bool toggle = true;
+    public int selectedVar = 1;
+    public bool toggle = true;
 
-    bool playerTurn = true;
-    bool enemyTurn = false;
+    public int selectedItem = 1;
+    public bool canBrowse = false;
 
-    bool defending = false;
+    public bool playerTurn = true;
+    public bool enemyTurn = false;
+
+    public bool defending = false;
 
     public GameObject attack;
     public GameObject defend;
@@ -24,15 +27,31 @@ public class selectAbility : MonoBehaviour
     public GameObject ptext;
 
     public GameObject itemMenu;
+    public GameObject smallPotion;
+    private GameObject smallPotionArrow;
+    public GameObject mediumPotion;
+    private GameObject mediumPotionArrow;
+    public GameObject largePotion;
+    private GameObject largePotionArrow;
+    public GameObject itemsBack;
+    private GameObject itemsBackArrow;
 
     private enemyScript eScript;
     private playerScript pScript;
+
+    private SaveInfoScript saveScript;
 
     private void Start()
     {
         eScript = GameObject.FindWithTag("Enemy").GetComponent<enemyScript>();
         pScript = GameObject.FindWithTag("Player").GetComponent<playerScript>();
-      
+
+        saveScript = pScript.saveObject.GetComponent<SaveInfoScript>();
+
+        smallPotionArrow = smallPotion.transform.GetChild(0).gameObject;
+        mediumPotionArrow = mediumPotion.transform.GetChild(0).gameObject;
+        largePotionArrow = largePotion.transform.GetChild(0).gameObject;
+        itemsBackArrow = itemsBack.transform.GetChild(0).gameObject;
     }
 
     public void Update()
@@ -42,7 +61,8 @@ public class selectAbility : MonoBehaviour
             defending = false;
             if (toggle == true)
             {
-                StartCoroutine(Toggling());
+                print("Toggle");
+                Toggling();
                 if (selectedVar == 1)
                 {
                     attack.SetActive(true);
@@ -65,8 +85,7 @@ public class selectAbility : MonoBehaviour
                     defend.SetActive(false);
                     items.SetActive(true);
                     flee.SetActive(false);
-                    itemMenu.SetActive(true);
-                    pScript.addhealth(1);
+                    //pScript.addhealth(1);
                 }
                 if (selectedVar == 4)
                 {
@@ -76,8 +95,11 @@ public class selectAbility : MonoBehaviour
                     flee.SetActive(true);
                     itemMenu.SetActive(false);
                 }
+
+
             }
-            if (Input.GetKeyDown("space") && selectedVar == 1)
+
+            if (Input.GetKeyDown("space") && selectedVar == 1) //attack option
             {
                 //ptext.SetActive(true);
                 eScript.takedamage(pScript.totalDamage);
@@ -87,7 +109,7 @@ public class selectAbility : MonoBehaviour
                 playerTurn = false;
                 enemyTurn = true;
             }
-            if (Input.GetKeyDown("space") && selectedVar == 2)
+            if (Input.GetKeyDown("space") && selectedVar == 2) //defend option
             {
                 //etext.SetActive(true);
                 //GameObject.FindWithTag("Player").GetComponent<playerScript>().PlayerDamageCalcDef();
@@ -97,18 +119,94 @@ public class selectAbility : MonoBehaviour
                 playerTurn = false;
                 enemyTurn = true;
             }
-            if (Input.GetKeyDown("space") && selectedVar == 3)
+            if (Input.GetKeyDown("space") && selectedVar == 3 && !canBrowse) //items menu
             {
+                items.SetActive(false);
                 print("Player Opens Menu");
-                //unhides menu - bool inmenu true (example)
-                playerTurn = false;
-                enemyTurn = true;
+                itemMenu.SetActive(true);
+                toggle = false;
+                canBrowse = true;
+
             }
-            if (Input.GetKeyDown("space") && selectedVar == 4)
+            if (Input.GetKeyDown("space") && selectedVar == 4) //flee option
             {
                 print("Player Flees");
                 SceneManager.LoadScene("overWorld_01");
             }
+
+            if (canBrowse)
+            {
+                ItemBrowse();
+                if (selectedItem == 1)
+                {
+                    smallPotionArrow.SetActive(true);
+                    mediumPotionArrow.SetActive(false);
+                    largePotionArrow.SetActive(false);
+                    itemsBackArrow.SetActive(false);
+                }
+                if (selectedItem == 2)
+                {
+                    smallPotionArrow.SetActive(false);
+                    mediumPotionArrow.SetActive(true);
+                    largePotionArrow.SetActive(false);
+                    itemsBackArrow.SetActive(false);
+                }
+                if (selectedItem == 3)
+                {
+                    smallPotionArrow.SetActive(false);
+                    mediumPotionArrow.SetActive(false);
+                    largePotionArrow.SetActive(true);
+                    itemsBackArrow.SetActive(false);
+                }
+                if (selectedItem == 4)
+                {
+                    smallPotionArrow.SetActive(false);
+                    mediumPotionArrow.SetActive(false);
+                    largePotionArrow.SetActive(false);
+                    itemsBackArrow.SetActive(true);
+                }
+
+                if (Input.GetKeyDown("space") && selectedItem == 1 && saveScript.SmallPotions >0) //use small potion
+                {
+                    pScript.addhealth(20);
+                    saveScript.SmallPotions -= 1;
+                    canBrowse = false;
+                    toggle = true;
+                    itemMenu.SetActive(false);
+                    playerTurn = false;
+                    enemyTurn = true;
+                }
+                if (Input.GetKeyDown("space") && selectedItem == 2 && saveScript.MediumPotions > 0) //use medium potion
+                {
+                    pScript.addhealth(40);
+                    saveScript.MediumPotions -= 1;
+                    canBrowse = false;
+                    toggle = true;
+                    itemMenu.SetActive(false);
+                    playerTurn = false;
+                    enemyTurn = true;
+                }
+                if (Input.GetKeyDown("space") && selectedItem == 3 && saveScript.LargePotions > 0) //use large potion
+                {
+                    pScript.addhealth(80);
+                    saveScript.LargePotions -= 1;
+                    canBrowse = false;
+                    toggle = true;
+                    itemMenu.SetActive(false);
+                    playerTurn = false;
+                    enemyTurn = true;
+                }
+                if (Input.GetKeyDown("space") && selectedItem == 4) //return
+                {
+                    itemMenu.SetActive(false);
+                    canBrowse = false;
+                    toggle = true;
+                }
+
+            }
+
+
+           
         }
 
         //enemy turn/ai script
@@ -142,25 +240,56 @@ public class selectAbility : MonoBehaviour
     }
 
 
-    IEnumerator Toggling()
+    void Toggling()
     {
-        toggle = false;
+        print(Input.GetAxis("Horizontal"));
         if (Input.GetAxis("Horizontal") < 0)
         {
             selectedVar--;
+            StartCoroutine(ToggleTimer());
         }
         if (Input.GetAxis("Horizontal") > 0)
         {
             selectedVar++;
+            StartCoroutine(ToggleTimer());
         }
         if (selectedVar > 4)
             selectedVar = 1;
         if (selectedVar < 1)
             selectedVar = 4;
-
-            yield return new WaitForSeconds(0.3f);
-            toggle = true;
     }
+
+    IEnumerator ToggleTimer()
+    {
+        toggle = false;
+        yield return new WaitForSeconds(0.3f);
+        toggle = true;
+    }
+
+    void ItemBrowse()
+    {
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            selectedItem--;
+        }
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            selectedItem++;
+        }
+        if (selectedItem > 4)
+            selectedItem = 1;
+        if (selectedItem < 1)
+            selectedItem = 4;  
+    }
+
+    IEnumerator BrowseTimer()
+    {
+        canBrowse = false;
+        yield return new WaitForSeconds(0.3f);
+        canBrowse = true;
+    }
+
+
     IEnumerator WaitForEText()
     {
         etext.SetActive(true);
