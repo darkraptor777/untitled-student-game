@@ -13,10 +13,8 @@ public class selectAbility : MonoBehaviour
 
     public int selectedItem = 1;
     public bool canBrowse = false;
-
     public bool playerTurn = true;
     public bool enemyTurn = false;
-
     public bool defending = false;
 
     public GameObject attack;
@@ -95,8 +93,6 @@ public class selectAbility : MonoBehaviour
                     flee.SetActive(true);
                     itemMenu.SetActive(false);
                 }
-
-
             }
 
             if (Input.GetKeyDown("space") && selectedVar == 1) //attack option
@@ -130,8 +126,11 @@ public class selectAbility : MonoBehaviour
             }
             if (Input.GetKeyDown("space") && selectedVar == 4) //flee option
             {
-                print("Player Flees");
-                SceneManager.LoadScene("overWorld_01");
+				//needs changing to current overworld
+				if(Random.value > 0.5)
+				{
+					SceneManager.LoadScene("overWorld_01");
+				}
             }
 
             if (canBrowse)
@@ -202,11 +201,7 @@ public class selectAbility : MonoBehaviour
                     canBrowse = false;
                     toggle = true;
                 }
-
             }
-
-
-           
         }
 
         //enemy turn/ai script
@@ -217,8 +212,6 @@ public class selectAbility : MonoBehaviour
             items.SetActive(false);
             flee.SetActive(false);
             //play animation
-
-
 
             if (!defending)
             {
