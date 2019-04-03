@@ -10,8 +10,8 @@ public class WorldSaveScript : MonoBehaviour
 {
 	public GameObject player;
 	public string filePath;
-    public float playerX;
-	public float playerY;
+    public float playerX=-22.0f;
+	public float playerY=0.0f;
 	public bool enemyOne;
 	public bool enemyTwo;
 	public bool enemyThree;
@@ -20,8 +20,25 @@ public class WorldSaveScript : MonoBehaviour
     void Start()
     {
 		print("Loaded World Save");
+        if (filePath == "")
+        {
+            filePath = SceneManager.GetActiveScene().name + ".txt";
+        }
         Load();
     }
+
+    public void SaveDEFAULT(string worldPath)
+    {
+        //write some info to a text file
+        string Info = -22.0f + " " + 0.0f + " " + true + " " + true + " " + true + " ";
+
+        if (!Directory.Exists("Save Info"))
+            Directory.CreateDirectory("Save Info");
+        FileStream file = File.Create("Save Info/" + worldPath);
+        file.Close();
+        File.WriteAllText("Save Info/" + worldPath, Info);
+    }
+
 
     public void Save()
     {

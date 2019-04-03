@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1213053301}
-  filePath: world_02.txt
+  filePath: 
   playerX: 0
   playerY: 0
   enemyOne: 1

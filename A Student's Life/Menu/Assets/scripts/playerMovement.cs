@@ -65,6 +65,8 @@ public class playerMovement : MonoBehaviour
         }
         if (col.gameObject.tag == "RBumper")
         {
+
+            worldInfo.SaveDEFAULT(nextLVL + ".txt");
             SceneManager.LoadScene(nextLVL);
         }
         if (col.gameObject.tag == "Shop")
