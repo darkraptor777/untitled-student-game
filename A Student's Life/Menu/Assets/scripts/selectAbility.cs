@@ -23,6 +23,7 @@ public class selectAbility : MonoBehaviour
     public GameObject flee;
     public GameObject etext;
     public GameObject ptext;
+    public GameObject failFlee;
 
     public GameObject itemMenu;
     public GameObject smallPotion;
@@ -126,11 +127,14 @@ public class selectAbility : MonoBehaviour
             }
             if (Input.GetKeyDown("space") && selectedVar == 4) //flee option
             {
-				//needs changing to current overworld
 				if(Random.value > 0.5)
 				{
-					SceneManager.LoadScene("overWorld_01");
-				}
+					SceneManager.LoadScene("overWorld_01");//needs changing to current overworld
+                }
+                else if (Random.value < 0.5)
+                {
+                    StartCoroutine(WaitForFleeText());
+                }
             }
 
             if (canBrowse)
@@ -304,5 +308,11 @@ public class selectAbility : MonoBehaviour
         ptext.SetActive(true);
         yield return new WaitForSeconds(2f);
         ptext.SetActive(false);
+    }
+    IEnumerator WaitForFleeText()
+    {
+        failFlee.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        failFlee.SetActive(false);
     }
 }
