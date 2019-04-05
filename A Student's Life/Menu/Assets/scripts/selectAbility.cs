@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.scripts;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 
 //text not updated when already present
 
@@ -26,12 +28,19 @@ public class selectAbility : MonoBehaviour
     public GameObject failFlee;
 
     public GameObject itemMenu;
+
     public GameObject smallPotion;
     private GameObject smallPotionArrow;
+    private GameObject smallPotionCount;
+
     public GameObject mediumPotion;
     private GameObject mediumPotionArrow;
+    private GameObject mediumPotionCount;
+
     public GameObject largePotion;
     private GameObject largePotionArrow;
+    private GameObject largePotionCount;
+
     public GameObject itemsBack;
     private GameObject itemsBackArrow;
 
@@ -51,6 +60,21 @@ public class selectAbility : MonoBehaviour
         mediumPotionArrow = mediumPotion.transform.GetChild(0).gameObject;
         largePotionArrow = largePotion.transform.GetChild(0).gameObject;
         itemsBackArrow = itemsBack.transform.GetChild(0).gameObject;
+
+        smallPotionCount = smallPotion.transform.GetChild(1).gameObject;
+        mediumPotionCount = mediumPotion.transform.GetChild(1).gameObject;
+        largePotionCount = largePotion.transform.GetChild(1).gameObject;
+
+        
+    }
+
+    private void updatePotionCounts()
+    {
+        
+        smallPotionCount.GetComponent<Text>().text = saveScript.SmallPotions.ToString();
+        mediumPotionCount.GetComponent<Text>().text = saveScript.MediumPotions.ToString();
+        largePotionCount.GetComponent<Text>().text = saveScript.LargePotions.ToString();
+        
     }
 
     public void Update()
@@ -60,7 +84,6 @@ public class selectAbility : MonoBehaviour
             defending = false;
             if (toggle == true)
             {
-                print("Toggle");
                 Toggling();
                 if (selectedVar == 1)
                 {
@@ -139,6 +162,7 @@ public class selectAbility : MonoBehaviour
 
             if (canBrowse)
             {
+                updatePotionCounts();
                 ItemBrowse();
                 if (selectedItem == 1)
                 {
@@ -173,6 +197,7 @@ public class selectAbility : MonoBehaviour
                 {
                     pScript.addhealth(20);
                     saveScript.SmallPotions -= 1;
+                    updatePotionCounts();
                     canBrowse = false;
                     toggle = true;
                     itemMenu.SetActive(false);
@@ -183,6 +208,7 @@ public class selectAbility : MonoBehaviour
                 {
                     pScript.addhealth(40);
                     saveScript.MediumPotions -= 1;
+                    updatePotionCounts();
                     canBrowse = false;
                     toggle = true;
                     itemMenu.SetActive(false);
@@ -193,6 +219,7 @@ public class selectAbility : MonoBehaviour
                 {
                     pScript.addhealth(80);
                     saveScript.LargePotions -= 1;
+                    updatePotionCounts();
                     canBrowse = false;
                     toggle = true;
                     itemMenu.SetActive(false);
@@ -239,7 +266,7 @@ public class selectAbility : MonoBehaviour
 
     void Toggling()
     {
-        print(Input.GetAxis("Horizontal"));
+        //print(Input.GetAxis("Horizontal"));
         if (Input.GetAxis("Horizontal") < 0)
         {
             selectedVar--;
