@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/battleScene_Frank.unity
+- path: Assets/Scenes/overWorld_02.unity
   isLoaded: 1
   isActive: 1

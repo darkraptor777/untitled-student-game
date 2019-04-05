@@ -3355,5 +3355,10 @@ PrefabInstance:
       propertyPath: saveObject
       value: 
       objectReference: {fileID: 1049012922}
+    - target: {fileID: 7558468901463062757, guid: 8d28beecb8935304990f1fb51b61db02,
+        type: 3}
+      propertyPath: returnScene
+      value: overWorld_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d28beecb8935304990f1fb51b61db02, type: 3}

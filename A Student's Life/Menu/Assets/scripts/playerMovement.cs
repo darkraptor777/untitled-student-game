@@ -63,6 +63,23 @@ public class playerMovement : MonoBehaviour
 			worldInfo.Save();
             SceneManager.LoadScene("battleScene_Frank");
         }
+        if (col.gameObject.name == "World_Maw")
+        {
+            switch (col.gameObject.GetComponent<enemyWorldBehaviour>().ID)
+            {
+                case 1:
+                    worldInfo.enemyOne = false;
+                    break;
+                case 2:
+                    worldInfo.enemyTwo = false;
+                    break;
+                case 3:
+                    worldInfo.enemyThree = false;
+                    break;
+            }
+            worldInfo.Save();
+            SceneManager.LoadScene("battleScene_Maw");
+        }
         if (col.gameObject.tag == "RBumper")
         {
 

@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: ca01f19c9f3251549aa35dc9820fa7be
+  - enabled: 1
+    path: Assets/Scenes/battleScene_Maw.unity
+    guid: a0ef1744a944b0f41b458597dc68429a
   m_configObjects: {}

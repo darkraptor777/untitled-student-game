@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class enemyScript : MonoBehaviour
 {
     public GameObject saveObject;
+    public string returnScene;
     private SaveInfoScript saveInfo;
     public static enemyScript instance = null;
     public string enemyName;
     public int enemyHealth = 30;
-    public const int maxenemyHealth = 30;
+    public int maxenemyHealth = 30;
     public int enemyDamage = 10;
     bool wonEncounter = false;
     public Text enemyDamageText;
@@ -35,7 +36,7 @@ public class enemyScript : MonoBehaviour
         if (wonEncounter)
         {
             saveInfo.Save();
-            SceneManager.LoadScene("overWorld_01");
+            SceneManager.LoadScene(returnScene);
         }
     }
 
