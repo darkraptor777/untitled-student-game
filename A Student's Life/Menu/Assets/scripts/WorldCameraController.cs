@@ -14,7 +14,12 @@ public class WorldCameraController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 newPos = new Vector3(player.transform.localPosition.x, 0.0f, -10.0f);
+        float playerX = player.transform.localPosition.x;
+        if (playerX < -18.5f)
+            playerX = -18.5f;
+        if (playerX > 18.5f)
+            playerX = 18.5f;
+        Vector3 newPos = new Vector3(playerX, 0.0f, -10.0f);
         transform.position = newPos;
     }
 }

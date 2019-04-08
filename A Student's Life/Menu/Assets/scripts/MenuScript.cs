@@ -12,6 +12,14 @@ public class MenuScript : MonoBehaviour
     public GameObject options;
     public GameObject end;
 
+    public WorldSaveScript worldInfo;
+
+
+    void Start()
+    {
+        worldInfo=GetComponent<WorldSaveScript>();
+    }
+
     public void FixedUpdate()
     {
         if (toggle == true)
@@ -38,6 +46,7 @@ public class MenuScript : MonoBehaviour
             }
             if (Input.GetKeyDown("space") && currVar == 1)
             {
+                worldInfo.SaveDEFAULT("overWorld_01.txt");
                 SceneManager.LoadScene("overWorld_01");
             }
             if (Input.GetKeyDown("space") && currVar == 2)
@@ -66,7 +75,7 @@ IEnumerator Toggling()
         if (currVar < 1)
             currVar = 3;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         toggle = true;
     }
 }
