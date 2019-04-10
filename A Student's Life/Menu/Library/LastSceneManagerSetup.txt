@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/overWorldShop.unity
+- path: Assets/Scenes/overWorld_03.unity
   isLoaded: 1
   isActive: 1
