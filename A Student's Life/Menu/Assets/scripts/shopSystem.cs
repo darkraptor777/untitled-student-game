@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class shopSystem : MonoBehaviour
 {
+    public GameObject SaveObject;
     //player gold amount
-    int playerGold = 20000;
+    int playerGold;
 
     //selection variables
     public GameObject wep;
@@ -62,7 +63,7 @@ public class shopSystem : MonoBehaviour
 
     void Start()
     {
-		
+        playerGold=SaveObject.GetComponent<SaveInfoScript>().Money;
     }
 
     void Update()
@@ -317,7 +318,7 @@ public class shopSystem : MonoBehaviour
         if (currVar < 1)
             currVar = 6;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         toggle = true;
     }
 }

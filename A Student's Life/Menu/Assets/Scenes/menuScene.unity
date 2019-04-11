@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -379,7 +380,6 @@ MonoBehaviour:
   start: {fileID: 1709829120}
   options: {fileID: 2110124278}
   end: {fileID: 1422426928}
-  worldInfo: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -449,12 +449,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  filePath: 
+  filePath: overWorld_01.txt
   playerX: -22
   playerY: 0
   enemyOne: 0
   enemyTwo: 0
   enemyThree: 0
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186c3b328413c6c49b26801213a2963f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  Money: 0
+  SmallPotions: 0
+  MediumPotions: 0
+  LargePotions: 0
+  WeaponTier: 0
+  BootTier: 0
+  ArmourTier: 0
 --- !u!1 &816733622
 GameObject:
   m_ObjectHideFlags: 0

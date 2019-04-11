@@ -95,4 +95,16 @@ public class SaveInfoScript : MonoBehaviour
         }
     }
 
+    public void Default()
+    {
+        Health=100;
+        Money=0;
+        SmallPotions=0;
+        MediumPotions=0;
+        LargePotions=0;
+        WeaponTier=0;
+        BootTier=0;
+        ArmourTier=0;
+        Save();
+    }
 }

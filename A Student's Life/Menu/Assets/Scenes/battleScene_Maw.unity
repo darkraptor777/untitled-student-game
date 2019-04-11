@@ -3482,5 +3482,15 @@ PrefabInstance:
       propertyPath: returnScene
       value: overWorld_02
       objectReference: {fileID: 0}
+    - target: {fileID: 5594812584101989611, guid: fee7e2152d0323242a22af04f5bd08f4,
+        type: 3}
+      propertyPath: bounty
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594812584101989611, guid: fee7e2152d0323242a22af04f5bd08f4,
+        type: 3}
+      propertyPath: enemyName
+      value: Fearmonger
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fee7e2152d0323242a22af04f5bd08f4, type: 3}

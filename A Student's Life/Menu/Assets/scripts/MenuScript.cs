@@ -12,12 +12,14 @@ public class MenuScript : MonoBehaviour
     public GameObject options;
     public GameObject end;
 
-    public WorldSaveScript worldInfo;
+    private WorldSaveScript worldInfo;
+    private SaveInfoScript playerInfo;
 
 
     void Start()
     {
         worldInfo=GetComponent<WorldSaveScript>();
+        playerInfo = GetComponent<SaveInfoScript>();
     }
 
     public void FixedUpdate()
@@ -47,6 +49,7 @@ public class MenuScript : MonoBehaviour
             if (Input.GetKeyDown("space") && currVar == 1)
             {
                 worldInfo.SaveDEFAULT("overWorld_01.txt");
+                playerInfo.Default();
                 SceneManager.LoadScene("overWorld_01");
             }
             if (Input.GetKeyDown("space") && currVar == 2)
