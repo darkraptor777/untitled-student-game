@@ -70,6 +70,7 @@
     <Compile Include="Assets\scripts\SaveInfoScript.cs" />
     <Compile Include="Assets\scripts\selectAbility.cs" />
     <Compile Include="Assets\scripts\shopSystem.cs" />
+    <Compile Include="Assets\scripts\timerNewScene.cs" />
     <Compile Include="Assets\scripts\weapon.cs" />
     <Compile Include="Assets\scripts\WorldCameraController.cs" />
     <Compile Include="Assets\scripts\WorldSaveScript.cs" />

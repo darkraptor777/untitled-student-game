@@ -50,7 +50,7 @@ public class MenuScript : MonoBehaviour
             {
                 worldInfo.SaveDEFAULT("overWorld_01.txt");
                 playerInfo.Default();
-                SceneManager.LoadScene("overWorld_01");
+                SceneManager.LoadScene("openingScene");
             }
             if (Input.GetKeyDown("space") && currVar == 2)
             {
