@@ -47,7 +47,7 @@ public class MenuScript : MonoBehaviour
             if (Input.GetKeyDown("space") && currVar == 1)
             {
                 worldInfo.SaveDEFAULT("overWorld_01.txt");
-                SceneManager.LoadScene("overWorld_01");
+                SceneManager.LoadScene("openingScene");
             }
             if (Input.GetKeyDown("space") && currVar == 2)
             {
