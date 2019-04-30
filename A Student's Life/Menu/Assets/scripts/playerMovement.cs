@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
@@ -15,6 +18,14 @@ public class playerMovement : MonoBehaviour
     public string nextLVL;
     private bool facingRight;
 
+    void lastWorld()
+    {
+        if (!Directory.Exists("Save Info"))
+            Directory.CreateDirectory("Save Info");
+        FileStream file = File.Create("Save Info/LastWorld.txt");
+        file.Close();
+        File.WriteAllText("Save Info/LastWorld.txt", SceneManager.GetActiveScene().name);
+    }
 
     void Start()
     {
@@ -88,6 +99,7 @@ public class playerMovement : MonoBehaviour
         }
         if (col.gameObject.tag == "Shop")
         {
+            lastWorld();
             SceneManager.LoadScene("shopScene");
         }
     }

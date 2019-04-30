@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class shopSystem : MonoBehaviour
 {
@@ -60,6 +64,25 @@ public class shopSystem : MonoBehaviour
 	public Text armourCostText;
 	public Text bootsCostText;
     public Text playerMoney;
+
+    void lastWorld()
+    {
+        
+
+        string Info="menuScene";
+        try
+        {
+            Info = File.ReadAllText("Save Info/LastWorld.txt");
+            
+        }
+        catch
+        {
+            Debug.Log("ERROR: Save Info/LastWorld.txt failed to load");
+            
+        }
+        SaveObject.GetComponent<WorldSaveScript>().SaveDEFAULT(Info + ".txt");
+        SceneManager.LoadScene(Info);
+    }
 
     void Start()
     {
@@ -136,6 +159,10 @@ public class shopSystem : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown("escape"))
+        {
+            lastWorld();
+        }
 
         //weapon buying selection
         if (Input.GetKeyDown("space") && currVar == 1 && noWeapon)
