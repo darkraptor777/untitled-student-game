@@ -91,6 +91,11 @@ public class playerMovement : MonoBehaviour
             worldInfo.Save();
             SceneManager.LoadScene("battleScene_Maw");
         }
+        if (col.gameObject.name == "World_Boss")
+        {
+            worldInfo.Save();
+            SceneManager.LoadScene("battleScene_Boss");
+        }
         if (col.gameObject.tag == "RBumper")
         {
 

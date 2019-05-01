@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class timerNewScene : MonoBehaviour
 {
-    float timer = 12f;
+    float timer = 8f;
 
     void Update()
     {

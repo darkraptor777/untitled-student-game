@@ -1,1 +1,1 @@
--23.64525 0 True True True 
+-22 0 True True True 
